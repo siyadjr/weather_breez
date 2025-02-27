@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:weatherbreez/controller/home_screen_provider.dart';
+import 'package:weatherbreez/controller/weather_provider.dart';
 import 'package:weatherbreez/model/search_model.dart';
 import 'package:weatherbreez/view/authentication/splash_screen.dart';
 
@@ -28,7 +29,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => HomeScreenProvider(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => WeatherProvider(),
+        ),
       ],
       child: const MaterialApp(
         title: 'WeatherBreez',

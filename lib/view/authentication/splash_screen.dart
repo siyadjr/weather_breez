@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animator/flutter_animator.dart';
-import 'package:weatherbreez/core/constants/app_colours.dart';
+
 import 'package:weatherbreez/view/home/home_screen.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -13,13 +13,13 @@ class SplashScreen extends StatelessWidget {
       Future.delayed(const Duration(seconds: 4), () {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) =>  HomeScreen()),
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
       });
     });
 
     return Scaffold(
-      backgroundColor: AppColours().mainBackGroundColor,
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +34,6 @@ class SplashScreen extends StatelessWidget {
                 width: size.width / 2,
               ),
             ),
-           
           ],
         ),
       ),

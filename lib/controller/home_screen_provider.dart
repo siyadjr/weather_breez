@@ -6,6 +6,7 @@ class HomeScreenProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
   List<SearchModel> _searches = [];
+  TextEditingController searchController = TextEditingController();
   List<SearchModel> get previousSearches => _searches;
   Future<void> getSearchHistory() async {
     _isLoading = true;
@@ -26,6 +27,11 @@ class HomeScreenProvider extends ChangeNotifier {
     _searches.clear();
     notifyListeners();
     await SearchDb().clearSearch();
+    notifyListeners();
+  }
+
+  Future<void> recentToTextfield(String city) async {
+    searchController.text = city;
     notifyListeners();
   }
 }

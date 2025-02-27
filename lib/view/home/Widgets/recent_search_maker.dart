@@ -4,8 +4,8 @@ import 'package:weatherbreez/controller/home_screen_provider.dart';
 import 'package:weatherbreez/view/home/Widgets/recent_search_container.dart';
 
 class RecentSearchMaker extends StatelessWidget {
-  HomeScreenProvider provider;
-   RecentSearchMaker({
+  final HomeScreenProvider provider;
+   const RecentSearchMaker({
     super.key,required this.provider
   });
 
@@ -25,7 +25,7 @@ class RecentSearchMaker extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final search = homeProvider.previousSearches[index];
                         return RecentSearchContainer(
-                            city: search.searchName, onTap: () {});
+                            city: search.searchName, provider: provider,);
                       },
                       itemCount: homeProvider.previousSearches.length >= 5
                           ? 5
