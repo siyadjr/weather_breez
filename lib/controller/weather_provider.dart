@@ -22,9 +22,8 @@ class WeatherProvider extends ChangeNotifier {
 
       final data = await WeatherApi().getWeather(city);
       _weatherData = WeatherModel.fromJson(data);
-      await Future.delayed(const Duration(seconds: 3), () {
-        _isLoading = false;
-      });
+
+      _isLoading = false;
 
       notifyListeners();
     } catch (e) {

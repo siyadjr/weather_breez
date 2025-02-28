@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:weatherbreez/core/constants/app_colours.dart';
+import 'package:weatherbreez/localization/local.dart';
 
 class WeatherDataEmpty extends StatelessWidget {
   const WeatherDataEmpty({
@@ -13,7 +15,7 @@ class WeatherDataEmpty extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        'No weather data available',
+        Localdata.noData.getString(context),
         style: TextStyle(color: colours.headingText, fontSize: 18),
       ),
     );

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
+import 'package:weatherbreez/localization/local.dart';
 
 import '../../../core/constants/app_colours.dart';
 
@@ -21,7 +23,7 @@ class FeelsLikeChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(
-        'Feels like $feelsLike°',
+        '${Localdata.feelsLike.getString(context)} $feelsLike°',
         style: TextStyle(
           color: colours.normalHeading,
         ),

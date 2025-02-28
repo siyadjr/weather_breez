@@ -78,21 +78,19 @@ class HomeScreen extends StatelessWidget {
                         Text(
                           Localdata.recentSearches.getString(context),
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                             color: AppColours().normalHeading,
                           ),
                         ),
-                        Expanded(
-                          child: TextButton(
-                              onPressed: () {
-                                provider.clearData();
-                              },
-                              child: Text(
-                                Localdata.clear.getString(context),
-                                overflow: TextOverflow.ellipsis,
-                              )),
-                        )
+                        TextButton(
+                            onPressed: () {
+                              provider.clearData();
+                            },
+                            child: Text(
+                              Localdata.clear.getString(context),
+                              overflow: TextOverflow.ellipsis,
+                            ))
                       ]),
                   const SizedBox(height: 10),
                   RecentSearchMaker(
