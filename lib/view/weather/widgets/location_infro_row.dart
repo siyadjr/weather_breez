@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weatherbreez/core/constants/app_colours.dart';
-
 import 'weather_time_chip.dart';
 
 class LocationInfoRow extends StatelessWidget {

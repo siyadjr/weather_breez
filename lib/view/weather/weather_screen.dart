@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_animator/flutter_animator.dart';
 import 'package:weatherbreez/controller/weather_provider.dart';
 import 'package:weatherbreez/core/constants/app_colours.dart';
 import 'package:weatherbreez/view/weather/widgets/build_loading_indicator.dart';
@@ -26,25 +27,46 @@ class WeatherScreen extends StatelessWidget {
       body: Consumer<WeatherProvider>(
         builder: (context, weatherProvider, child) {
           if (weatherProvider.isLoading) {
-            return const BuildLoadingIndicator();
+            return FadeIn(
+              preferences: const AnimationPreferences(
+                duration: Duration(milliseconds: 600),
+              ),
+              child: const BuildLoadingIndicator(),
+            );
           }
 
           if (weatherProvider.error != null) {
-            return ApiLocationError(
-              colours: colours,
-              city: city,
-              weatherProvider: weatherProvider,
+            return FadeInDown(
+              preferences: const AnimationPreferences(
+                duration: Duration(milliseconds: 800),
+              ),
+              child: ApiLocationError(
+                colours: colours,
+                city: city,
+                weatherProvider: weatherProvider,
+              ),
             );
           }
 
           final weatherData = weatherProvider.weatherData;
           if (weatherData == null) {
-            return WeatherDataEmpty(colours: colours);
+            return FadeInLeft(
+              preferences: const AnimationPreferences(
+                duration: Duration(milliseconds: 800),
+              ),
+              child: WeatherDataEmpty(colours: colours),
+            );
           }
 
-          return WeatherContent(
-            weatherData: weatherData,
-            colours: colours,
+          return FadeInRight(
+            preferences: const AnimationPreferences(
+              duration: Duration(milliseconds: 800),
+              offset: Duration(milliseconds: 300),
+            ),
+            child: WeatherContent(
+              weatherData: weatherData,
+              colours: colours,
+            ),
           );
         },
       ),
@@ -55,11 +77,16 @@ class WeatherScreen extends StatelessWidget {
     return AppBar(
       backgroundColor: colours.mainBackGroundColor.withOpacity(0.8),
       elevation: 0,
-      title: Text(
-        'Weather for $city',
-        style: TextStyle(
-          color: colours.headingText,
-          fontWeight: FontWeight.bold,
+      title: FadeInDown(
+        preferences: const AnimationPreferences(
+          duration: Duration(milliseconds: 600),
+        ),
+        child: Text(
+          'Weather for $city',
+          style: TextStyle(
+            color: colours.headingText,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       centerTitle: true,
@@ -67,19 +94,3 @@ class WeatherScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

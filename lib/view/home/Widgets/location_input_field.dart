@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:weatherbreez/controller/home_screen_provider.dart';
 import 'package:weatherbreez/core/constants/app_colours.dart';
+import 'package:weatherbreez/localization/local.dart';
 import 'package:weatherbreez/view/weather/weather_screen.dart';
 
 class LocationInputField extends StatelessWidget {
@@ -22,7 +24,7 @@ class LocationInputField extends StatelessWidget {
         controller: provider.searchController,
         style: TextStyle(color: AppColours().normalHeading),
         decoration: InputDecoration(
-            hintText: 'Search for a city...',
+            hintText: Localdata.searchHint.getString(context),
             hintStyle: TextStyle(color: AppColours().normalHeading),
             prefixIcon: Icon(Icons.search, color: AppColours().normalHeading),
             border: InputBorder.none,
@@ -34,7 +36,8 @@ class LocationInputField extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (ctx) =>  WeatherScreen(city:provider.searchController.text)));
+                            builder: (ctx) => WeatherScreen(
+                                city: provider.searchController.text)));
                   }
                 },
                 child: const Text('enter'))),

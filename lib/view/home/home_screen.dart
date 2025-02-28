@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animator/flutter_animator.dart';
+import 'package:flutter_localization/flutter_localization.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:weatherbreez/controller/home_screen_provider.dart';
 import 'package:weatherbreez/core/constants/app_colours.dart';
 import 'package:weatherbreez/core/constants/custom_scaffold.dart';
 import 'package:weatherbreez/core/reusablewidgets/loading_indicator.dart';
+import 'package:weatherbreez/localization/local.dart';
 import 'package:weatherbreez/view/home/Widgets/location_input_field.dart';
 import 'package:weatherbreez/view/home/Widgets/recent_search_maker.dart';
 
@@ -14,10 +16,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<HomeScreenProvider>(context, listen: false);
+    final FlutterLocalization localization = FlutterLocalization.instance;
+
     return FadeIn(
       child: Consumer<HomeScreenProvider>(
         builder: (context, homeScreenProvider, child) => CustomScaffold(
-          title: 'WeatherBreez',
+          title: Localdata.body.getString(context),
           showAppBar: false,
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -31,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'WeatherBreez',
+                          Localdata.title.getString(context),
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
@@ -39,9 +43,16 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                          icon: Icon(Icons.settings,
+                          icon: Icon(Icons.language,
                               color: AppColours().normalHeading),
-                          onPressed: () {},
+                          onPressed: () {
+                            if (localization.currentLocale?.languageCode ==
+                                'en') {
+                              localization.translate('ml');
+                            } else {
+                              localization.translate('en');
+                            }
+                          },
                         ),
                       ],
                     ),
@@ -65,18 +76,23 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Recent Searches',
+                          Localdata.recentSearches.getString(context),
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: AppColours().normalHeading,
                           ),
                         ),
-                        TextButton(
-                            onPressed: () {
-                              provider.clearData();
-                            },
-                            child: const Text('clear'))
+                        Expanded(
+                          child: TextButton(
+                              onPressed: () {
+                                provider.clearData();
+                              },
+                              child: Text(
+                                Localdata.clear.getString(context),
+                                overflow: TextOverflow.ellipsis,
+                              )),
+                        )
                       ]),
                   const SizedBox(height: 10),
                   RecentSearchMaker(
@@ -88,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Search for a city to see the weather forecast',
+                          Localdata.searchText.getString(context),
                           style: TextStyle(color: AppColours().normalHeading),
                           textAlign: TextAlign.center,
                         ),
